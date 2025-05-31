@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+import { Exclude } from 'class-transformer';
 import { File } from './file.entity';
 
 @Entity('tb_account')
@@ -13,6 +14,7 @@ export class Account {
   accountKey: string;
 
   @Column({ length: 256 })
+  @Exclude()
   password: string;
 
   @Column({ name: 'sns_key', length: 60, nullable: true })
@@ -57,7 +59,7 @@ export class Account {
   @Column({ name: 'password_at', nullable: true })
   passwordAt: Date;
 
-  profileImage: File = new File();
+  profileImage: File;
 
   constructor() {
     this.profileImage = new File();
