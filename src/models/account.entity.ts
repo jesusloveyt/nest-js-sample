@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { File } from './file.entity';
 
 @Entity('tb_account')
 export class Account {
@@ -16,9 +17,6 @@ export class Account {
 
   @Column({ name: 'sns_key', length: 60, nullable: true })
   snsKey: string;
-
-  @Column({ name: 'company_id' })
-  companyId: number;
 
   @Column({ name: 'user_name', length: 30 })
   userName: string;
@@ -58,4 +56,10 @@ export class Account {
 
   @Column({ name: 'password_at', nullable: true })
   passwordAt: Date;
+
+  profileImage: File = new File();
+
+  constructor() {
+    this.profileImage = new File();
+  }
 } 
